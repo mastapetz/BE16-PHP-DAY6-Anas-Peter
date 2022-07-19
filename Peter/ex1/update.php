@@ -1,5 +1,15 @@
 <?php
 session_start();
+    //var_dump($_SESSION);
+    if (!isset($_SESSION[ 'user']) || $_GET["id"] != $_SESSION["user"]  ) {
+        header("Location: home.php");
+        exit ;
+    }
+  
+  if (!isset($_SESSION['adm']) && !isset ($_SESSION['user'])) {
+    header("Location: index.php");
+    exit ;
+  }
 require_once 'components/db_connect.php';
 require_once 'components/file_upload.php';
 // if session is not set this will redirect to login page
