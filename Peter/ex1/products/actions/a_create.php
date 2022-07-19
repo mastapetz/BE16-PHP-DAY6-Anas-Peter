@@ -25,9 +25,10 @@ if ($_POST) {
    
     if($supplier== 'none'){
     // checks if supplier is defined and sets it to null if none is chosen
-    $sql = "INSERT INTO dishes (name, price, image, description, fk_supplierId) VALUES ('$name', $price,'$picture->fileName', '$description', null)";
+    // $sql = "INSERT INTO dishes (name, price, image, description, fk_supplierId) VALUES ('$name', $price,'$picture->fileName', '$description', null)"; //prework
+    $sql = "INSERT INTO dishes (name, price, image, description) VALUES ('$name', $price,'$picture->fileName', '$description')"; //serri livecoding
     }else{
-    $sql = "INSERT INTO dishes (name, price, image, description, fk_supplierId) VALUES ('$name', $price,'$picture->fileName', '$description', $supplier)";
+    $sql = "INSERT INTO dishes (name, price, image, description, fk_supplierId) VALUES ('$name', $price,'$picture->fileName', '$description', $supplier)"; //supplier doesnt need '' because its a number (Serri and prework)
     }
 
     if (mysqli_query($connect, $sql) === true) {

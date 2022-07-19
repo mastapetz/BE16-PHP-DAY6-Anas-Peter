@@ -13,7 +13,7 @@ if (isset($_SESSION['user']) != "" ) {
     exit;
   }
 
-$sql = "SELECT * FROM dishes";
+$sql = "SELECT * FROM `dishes` left JOIN suppliers ON dishes.fk_supplierId = suppliers.supplierId; "; //left join, so also products without supplier are shown
 $result = mysqli_query($connect ,$sql);
 $tbody=''; //this variable will hold the body for the table
 if(mysqli_num_rows($result)  > 0) {     
@@ -22,6 +22,7 @@ if(mysqli_num_rows($result)  > 0) {
             <td><img class='img-thumbnail' src='../pictures/" .$row['image']."'</td>
             <td>" .$row['name']."</td>
             <td>" .$row['price']."</td>
+            <td>" .$row['sup_name']."</td>
             <td><a href='update.php?id=" .$row['dishID']."'><button class='btn btn-primary btn-sm' type='button'>Edit</button></a>
             <a href='delete.php?id=" .$row['dishID']."'><button class='btn btn-danger btn-sm' type='button'>Delete</button></a></td>
             </tr>";
@@ -71,6 +72,7 @@ mysqli_close($connect);
                         <th>Picture</th>
                         <th>Name</th>
                         <th>price</th>
+                        <th>Supplier Name</th>
                         <th>Action</th>
                     </tr>
                 </thead>

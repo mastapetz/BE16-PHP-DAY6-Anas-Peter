@@ -23,19 +23,35 @@ if ($_GET['id']) {
         $price = $data['price'];
         $picture = $data['image'];
         $supplier = $data['fk_supplierId'];
-        $resultSup = mysqli_query($connect, "SELECT * FROM suppliers");
-        $supList = '';
-        if (mysqli_num_rows($resultSup)>0){
-            while($row = $resultSup->fetch_array(MYSQLI_ASSOC)){
+
+        $sql = "SELECT * FROM suppliers";
+        $result = mysqli_query($connect, $sql); //can be overwritten because old result (and sql) were used before and arent called again past this point
+        
+        $select = "";
+        //from serri
+        while($row = mysqli_fetch_assoc($result)){     //serri live coding
+            if($row["supplierId"] == $supplier) {
+                $select .=
+                "<option selected value='{$row['supplierId']}'>{$row['sup_name']}</option>";
+            }else{
+                $select .=
+                "<option value='{$row['supplierId']}'>{$row['sup_name']}</option>";
+            }
+           
+        }
+
+        // from prework
+        /* if (mysqli_num_rows($result)>0){
+            while($row = $result->fetch_array(MYSQLI_ASSOC)){
                 if($row['supplierId']== $supplier){
-                    $supList .= "<option selected value='{$row['supplierId']}'>{$row['sup_name']}</option>";
+                    $select .= "<option selected value='{$row['supplierId']}'>{$row['sup_name']}</option>";
                 } else {
-                    $supList .= "<option value='{$row['supplierId']}'>{$row['sup_name']}</option>" ;
+                    $select .= "<option value='{$row['supplierId']}'>{$row['sup_name']}</option>" ;
                 }
             }
         } else {
-            $supList = "<li>There are no suppliers registered</li>"; 
-        }
+            $select = "<li>There are no suppliers registered</li>"; 
+        } */
     } else {
         header("location: error.php");
     }
@@ -82,8 +98,9 @@ if ($_GET['id']) {
                     <tr>
                         <th>Supplier</th>
                         <td>
-                            <select class="form-select" name="supplier" aria-label="Default select example">
-                                <?php echo $supList; ?>
+                            <select name="supplier">
+                                <!-- <option value="none">Undefined</option> -->
+                                <?= $select; ?>
                             </select>
                         </td>
                     </tr>

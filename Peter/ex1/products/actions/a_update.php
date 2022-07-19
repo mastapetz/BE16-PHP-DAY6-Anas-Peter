@@ -17,7 +17,7 @@ require_once '../../components/file_upload.php';
 if ($_POST) {    
     $name = $_POST['name'];
     $price = $_POST['price'];
-    $supplier = $_POST['fk_supplierId'];
+    $supplier = $_POST['supplier']; //name comes from update.php line 101
     $id = $_POST['id'];
     //variable for upload pictures errors is initialised
     $uploadError = '';

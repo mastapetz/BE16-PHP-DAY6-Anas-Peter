@@ -14,8 +14,7 @@ if(mysqli_num_rows($result)  > 0) {
             <td><img class='img-thumbnail' src='pictures/" .$row['image']."'</td>
             <td>" .$row['name']."</td>
             <td>" .$row['price']."</td>
-            <td><a href='d3_update.php?id=" .$row['dishID']."'><button class='btn btn-primary btn-sm' type='button'>Edit</button></a>
-            <a href='d3_delete.php?id=" .$row['dishID']."'><button class='btn btn-danger btn-sm' type='button'>Delete</button></a></td>
+            
             </tr>";
     };
 } else {
@@ -103,7 +102,7 @@ mysqli_close($connect);
                         <th>Picture</th>
                         <th>Name</th>
                         <th>price</th>
-                        <th>Action</th>
+                        <!-- <th>Action</th> -->
                     </tr>
                 </thead>
                 <tbody>

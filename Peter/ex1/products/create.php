@@ -1,6 +1,5 @@
 <?php
 session_start();
-require_once '../components/db_connect.php';
 
 if (isset($_SESSION['user']) != "") {
   header( "Location: ../home.php");
@@ -11,12 +10,15 @@ if (!isset ($_SESSION['adm']) && !isset($_SESSION['user'])) {
   header( "Location: ../index.php");
   exit;
 }
+require_once '../components/db_connect.php';
 
-$suppliers = "";
-$result = mysqli_query($connect, "SELECT * FROM suppliers");
+$sql = "SELECT * FROM suppliers";
+$result = mysqli_query($connect, $sql );
 
-while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-  $suppliers .=
+$select = "";
+// while ($row = $result->fetch_array(MYSQLI_ASSOC)) { //prework
+while($row = mysqli_fetch_assoc($result)){     //serri live coding
+  $select .=
       "<option value='{$row['supplierId']}'>{$row['sup_name']}</option>";
 }
 ?>
@@ -62,8 +64,8 @@ while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
                         <th>Supplier</th>
                         <td>
                             <select class="form-select" name="supplier" aria-label="Default select example">
-                                <?php $suppliers; ?>
                                 <option selected value="none">Undefined</option>
+                                <?= $select; ?>
                             </select>
                         </td>
                     </tr>
