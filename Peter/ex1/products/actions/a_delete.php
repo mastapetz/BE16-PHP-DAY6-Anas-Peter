@@ -1,7 +1,7 @@
 <?php 
 session_start();
 
-if (isset($_SESSION[ 'user']) != "") {
+if (isset($_SESSION[ 'user']) != "") { //!= "" not needed
   header("Location: ../../home.php");
   exit ;
 }
@@ -16,7 +16,7 @@ require_once '../../components/db_connect.php';
 if ($_POST) {
     $id = $_POST['id'];
     $picture = $_POST['picture'];
-    ($picture =="product.png")?: unlink("../pictures/$picture");
+    ($picture =="product.png")?: unlink("../../pictures/$picture");
 
     $sql = "DELETE FROM dishes WHERE dishID = {$id}";
     if (mysqli_query($connect, $sql) === TRUE) {

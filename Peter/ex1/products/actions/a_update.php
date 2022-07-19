@@ -1,7 +1,7 @@
 <?php
-session_start()
+session_start();
 
-if (isset($_SESSION['user']) != ""){
+if (isset($_SESSION['user']) != ""){  //!= ""  not needed
     header("Location: ../../home.php");
     exit;
 }
@@ -17,17 +17,17 @@ require_once '../../components/file_upload.php';
 if ($_POST) {    
     $name = $_POST['name'];
     $price = $_POST['price'];
-    $supplier = $_POST['supplier']
+    $supplier = $_POST['fk_supplierId'];
     $id = $_POST['id'];
     //variable for upload pictures errors is initialised
     $uploadError = '';
 
     $picture = file_upload($_FILES['picture'],'product');//file_upload() called  
     if($picture->error===0){
-        ($_POST["picture"]=="product.png")?: unlink("../pictures/$_POST[picture]");           
-        $sql = "UPDATE dishes SET name = '$name', price = $price, image = '$picture->fileName', fk_supplierId = $supplier WHERE id  = {$id}";
+        ($_POST["picture"]=="product.png")?: unlink("../../pictures/$_POST[picture]");           
+        $sql = "UPDATE dishes SET image = '$picture->fileName', name = '$name', price = $price,  fk_supplierId = $supplier WHERE dishID  = {$id}";
     }else{
-        $sql = "UPDATE dishes SET name = '$name', price = $price, fk_supplier_Id = $supplier, WHERE id = {$id}";
+        $sql = "UPDATE dishes SET name = '$name', price = $price, fk_supplierId = $supplier WHERE dishID = {$id}";
     }    
     if (mysqli_query($connect, $sql) === TRUE) {
         $class = "success";

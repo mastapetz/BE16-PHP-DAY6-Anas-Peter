@@ -1,6 +1,6 @@
 <?php 
 session_start();
-require_once 'actions/db_connect.php';
+require_once '../components/db_connect.php';
 
 
 if (isset($_SESSION['user']) != "" ) {
@@ -13,13 +13,13 @@ if (isset($_SESSION['user']) != "" ) {
     exit;
   }
 
-$sql = "SELECT * FROM products";
+$sql = "SELECT * FROM dishes";
 $result = mysqli_query($connect ,$sql);
 $tbody=''; //this variable will hold the body for the table
 if(mysqli_num_rows($result)  > 0) {     
     while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){         
         $tbody .= "<tr>
-            <td><img class='img-thumbnail' src='pictures/" .$row['image']."'</td>
+            <td><img class='img-thumbnail' src='../pictures/" .$row['image']."'</td>
             <td>" .$row['name']."</td>
             <td>" .$row['price']."</td>
             <td><a href='update.php?id=" .$row['dishID']."'><button class='btn btn-primary btn-sm' type='button'>Edit</button></a>

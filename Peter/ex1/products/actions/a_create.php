@@ -11,8 +11,8 @@ if (!isset($_SESSION['adm']) && !isset ($_SESSION['user'])) {
   exit ;
 }
 
-require_once '../components/db_connect.php';
-require_once '../components/file_upload.php';
+require_once '../../components/db_connect.php';
+require_once '../../components/file_upload.php';
 
 if ($_POST) {   
     $name = $_POST['name'];
@@ -25,9 +25,9 @@ if ($_POST) {
    
     if($supplier== 'none'){
     // checks if supplier is defined and sets it to null if none is chosen
-    $sql = "INSERT INTO products (name, price, image, description, fk_supplierId) VALUES ('$name', $price,'$picture->fileName', '$description', null)";
+    $sql = "INSERT INTO dishes (name, price, image, description, fk_supplierId) VALUES ('$name', $price,'$picture->fileName', '$description', null)";
     }else{
-    $sql = "INSERT INTO products (name, price, image, description, fk_supplierId) VALUES ('$name', $price,'$picture->fileName', '$description', $supplier)";
+    $sql = "INSERT INTO dishes (name, price, image, description, fk_supplierId) VALUES ('$name', $price,'$picture->fileName', '$description', $supplier)";
     }
 
     if (mysqli_query($connect, $sql) === true) {
@@ -46,7 +46,7 @@ if ($_POST) {
     }
     mysqli_close($connect);
 } else {
-    header("location: ../../error.php");
+    header("location: ../error.php");
 }
 ?>
 
@@ -55,7 +55,7 @@ if ($_POST) {
     <head>
         <meta charset="UTF-8">
         <title>Update</title>
-        <?php require_once '../components/boot.php'?>
+        <?php require_once '../../components/boot.php'?>
     </head>
     <body>
         <div class="container">

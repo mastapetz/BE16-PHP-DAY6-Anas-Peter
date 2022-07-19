@@ -3,7 +3,7 @@
 $localhost = "127.0.0.1";
 $username = "root";
 $password = "";
-$dbname = "d6_crud_login";
+$dbname = "d6_prework_crud_login";
 
 // create connection
 $connect = mysqli_connect($localhost, $username, $password, $dbname);

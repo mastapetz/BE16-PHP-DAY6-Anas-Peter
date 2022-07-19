@@ -1,7 +1,7 @@
 <?php 
 session_start();
 
-if (isset($_SESSION[ 'user']) != "") {
+if (isset($_SESSION[ 'user']) != "") { //!="" not needed
   header("Location: ../home.php");
   exit ;
 }
@@ -52,7 +52,7 @@ if ($_GET['id']) {
     </head>
     <body>
         <fieldset>
-            <legend class='h2 mb-3'>Delete request <img class='img-thumbnail rounded-circle' src='pictures/<?php echo $picture ?>' alt="<?php echo $name ?>"></legend>
+            <legend class='h2 mb-3'>Delete request <img class='img-thumbnail rounded-circle' src='../pictures/<?php echo $picture ?>' alt="<?php echo $name ?>"></legend>
             <h5>You have selected the data below:</h5>
             <table class="table w-75 mt-3">
                 <tr>
